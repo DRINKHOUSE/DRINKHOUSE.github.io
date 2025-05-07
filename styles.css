@@ -114,7 +114,7 @@ footer {
     width: 100%;
 }
 
-/* Galería futurista */
+/* Galería futurista mejorada para compatibilidad móvil */
 .galeria-futurista {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -131,7 +131,8 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.galeria-item:hover {
+.galeria-item:hover,
+.galeria-item:focus-within {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
 }
@@ -139,11 +140,14 @@ footer {
 .galeria-item img {
     width: 100%;
     height: auto;
+    aspect-ratio: 4 / 3;
     display: block;
     transition: transform 0.3s ease;
+    border-radius: 10px;
 }
 
-.galeria-item:hover img {
+.galeria-item:hover img,
+.galeria-item:focus-within img {
     transform: scale(1.1);
 }
 
@@ -155,13 +159,9 @@ footer {
     right: 0;
     bottom: 0;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), 0 0 40px rgba(0, 229, 255, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.galeria-item:hover::before {
-    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .galeria-item p {
@@ -180,7 +180,8 @@ footer {
     opacity: 0;
 }
 
-.galeria-item:hover p {
+.galeria-item:hover p,
+.galeria-item:focus-within p {
     opacity: 1;
 }
 
@@ -275,8 +276,6 @@ main-menu {
     margin-top: 10px;
 }
 
-
-
 /* --------- ESTILOS RESPONSIVOS --------- */
 @media (max-width: 768px) {
     .image-box {
@@ -290,7 +289,8 @@ main-menu {
         margin-bottom: 15px;
     }
 
-    .content-box, .content-box2 {
+    .content-box,
+    .content-box2 {
         width: 95% !important;
     }
 
@@ -321,5 +321,10 @@ main-menu {
 
     header p {
         font-size: 1rem;
+    }
+
+    /* Fondo fijo pasa a scroll en móviles (Safari/iOS) */
+    body {
+        background-attachment: scroll;
     }
 }
